@@ -1,0 +1,33 @@
+<% if logged_in? %>
+<h1>タスク一覧</h1>
+
+<% if @tasks.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>項目</th>
+        <th>タスク(状態)  </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% i=1 %>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= link_to i, task %></td>
+          <td><%= task.content %>(<%= task.status %>)</td>
+        </tr>
+      <% i=i+1 %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to '新規タスクの登録', new_task_path, class: "btn btn-primary" %>
+<% else %>
+<div class="center jumbotron">
+  <div class="text-center">
+    <h1>Welcome to tasklist</h1>
+    <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+  </div>
+</div>
+<% end %>
